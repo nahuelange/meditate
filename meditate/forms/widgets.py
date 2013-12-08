@@ -2,7 +2,12 @@ from django.forms.widgets import Widget, Textarea, TextInput, HiddenInput, Email
 
 
 class MeditateWidget(Widget):
-    pass
+    @staticmethod
+    def factory(widget, default):
+        if widget is DefaultWidget:
+            return default()
+        else:
+            return widget()
 
 class DefaultWidget(MeditateWidget):
     pass

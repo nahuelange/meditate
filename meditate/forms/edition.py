@@ -25,13 +25,13 @@ class DynamicEntityForm(Form):
                     self.base_fields[field.name] = field_class(
                         initial=self.entity.fields.get(field_type__name=field.name),
                         required=field.mandatory,
-                        widget=widget_class(),
+                        widget=forms.MeditateWidget.factory(widget_class, default=field_class.widget),
                         label=field.title,
                     )
                 except:
                     self.base_fields[field.name] = field_class(
                         required=field.mandatory,
-                        widget=widget_class(),
+                        widget=forms.MeditateWidget.factory(widget_class, default=field_class.widget),
                         label=field.title,
                     )
 
