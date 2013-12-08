@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Classes d'entités</title>
+</head>
+<body>
+    <h1>Classes d'entités</h1>
+    <a href="{% url 'meditate.views.admin.entities_classes_edit' %}">Ajouter une classe</a>
+    <table>
+        <tr><th>Titre</th><th>Nom</th></tr>
+        {% for class in classes %}
+        <tr>
+            <td>{{ class.title }}</td>
+            <td>{{ class.name }}</td>
+            <td><a href="{% url 'meditate.views.admin.entities_classes_field_groups' class.pk %}">Champs</a></td>
+            <td><a href="{% url 'meditate.views.admin.entities_classes_types' class.pk %}">Types</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

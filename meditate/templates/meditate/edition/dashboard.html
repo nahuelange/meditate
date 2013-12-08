@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+{% for class_object in classes %}
+    <h2>Add document class : {{ class_object }}</h2>
+    <ul>
+    {% for class_type in class_object.class_types.all %}
+        <li><a href="{% url 'meditate.views.edition.entity_edit' class_type.name %}">{{ class_type }}</a></li>
+    {% endfor %}
+    </ul>
+{% endfor %}
+
+<table>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity }}</td>
+            <td><a href="{% url 'meditate.views.edition.entity_edit' entity.pk %}">Edit</a></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

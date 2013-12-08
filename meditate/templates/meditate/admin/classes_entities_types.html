@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h1>{{ class.name }}'s class types</h1>
+<a href="{% url 'meditate.views.admin.entities_classes_types_edit' class.pk %}">Ajouter un type</a>
+<table>
+    <tr>
+        <th>Titre</th>
+        <th>Nom</th>
+        <th>Template</th>
+        <th>Actions</th>
+    </tr>
+    {% for type in class.class_types.all %}
+        <tr>
+            <td>{{ type.title }}</td>
+            <td>{{ type.name }}</td>
+            <td>{{ type.template }}</td>
+            <td><a href="{% url 'meditate.views.admin.entities_classes_types_edit' type.genre.pk type.pk %}">Editer</a></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>

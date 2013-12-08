@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Édition de classe d'entité</title>
+</head>
+<body>
+    <h1>Édition de classe d'entité</h1>
+    <form action="" method="POST">
+        {%   csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Enregistrer" />
+    </form>
+</body>
+</html>

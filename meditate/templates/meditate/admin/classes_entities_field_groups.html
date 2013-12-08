@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<h1>{{ class.name }}'s class fields</h1>
+
+<a href="{% url 'meditate.views.admin.entities_classes_field_group_edit' class.pk %}">Add field groups</a>
+
+{% for field_group in class.field_groups.all %}
+    <table>
+        <thead>
+            <tr>
+                <th colspan="6">
+                    <a href="{% url 'meditate.views.admin.entities_classes_field_edit' class.pk field_group.pk %}">Add a field</a>
+                </th>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Style</th>
+                <th>XPath</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in field_group.fields.all %}
+                <tr>
+                    <td>{{ field.title }}</td>
+                    <td>{{ field.name }}</td>
+                    <td>{{ field.field_type }}</td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <a href="{% url 'meditate.views.admin.entities_classes_field_edit' class.pk field_group.pk field.pk %}">Edit</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endfor %}
+</body>
+</html>
