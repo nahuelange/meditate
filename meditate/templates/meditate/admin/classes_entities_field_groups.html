@@ -1,45 +1,57 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<h1>{{ class.name }}'s class fields</h1>
+{% extends 'meditate/base.html' %}
 
-<a href="{% url 'meditate.views.admin.entities_classes_field_group_edit' class.pk %}">Add field groups</a>
+{% block page_title %}{{ class.name }}'s class fields{% endblock %}
 
-{% for field_group in class.field_groups.all %}
-    <table>
-        <thead>
-            <tr>
-                <th colspan="6">
-                    <a href="{% url 'meditate.views.admin.entities_classes_field_edit' class.pk field_group.pk %}">Add a field</a>
-                </th>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <th>Nom</th>
-                <th>Type</th>
-                <th>Style</th>
-                <th>XPath</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for field in field_group.fields.all %}
-                <tr>
-                    <td>{{ field.title }}</td>
-                    <td>{{ field.name }}</td>
-                    <td>{{ field.field_type }}</td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a href="{% url 'meditate.views.admin.entities_classes_field_edit' class.pk field_group.pk field.pk %}">Edit</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endfor %}
-</body>
-</html>
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="nav nav-pills">
+                <li><a href="{% url 'meditate.views.admin.entities_classes_field_group_edit' class.pk %}">Add field groups</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% for field_group in field_groups %}
+        <div class="row well">
+            <div class="row">
+                <h2 class="col-lg-1">{{ field_group }}</h2>
+                <div class="col-lg-6">
+                    kjljklj
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="nav nav-pills">
+                        <li><a href="{% url 'meditate.views.admin.entities_classes_field_edit' class.pk field_group.pk %}">Add a field</a></li>
+                    </ul>
+                </div>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Nom</th>
+                        <th>Type</th>
+                        <th>Style</th>
+                        <th>XPath</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for field in field_group.fields.all %}
+                        <tr>
+                            <td>{{ field.title }}</td>
+                            <td>{{ field.name }}</td>
+                            <td>{{ field.field_type }}</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a href="{% url 'meditate.views.admin.entities_classes_field_edit' class.pk field_group.pk field.pk %}">Edit</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,26 +1,32 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<h1>{{ class.name }}'s class types</h1>
-<a href="{% url 'meditate.views.admin.entities_classes_types_edit' class.pk %}">Ajouter un type</a>
-<table>
-    <tr>
-        <th>Titre</th>
-        <th>Nom</th>
-        <th>Template</th>
-        <th>Actions</th>
-    </tr>
-    {% for type in class.class_types.all %}
-        <tr>
-            <td>{{ type.title }}</td>
-            <td>{{ type.name }}</td>
-            <td>{{ type.template }}</td>
-            <td><a href="{% url 'meditate.views.admin.entities_classes_types_edit' type.genre.pk type.pk %}">Editer</a></td>
-        </tr>
-    {% endfor %}
-</table>
-</body>
-</html>
+{% extends 'meditate/base.html' %}
+
+{% block page_title %}{{ class.name }}'s class types{% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12">
+            <ul class="nav nav-pills">
+                <li><a href="{% url 'meditate.views.admin.entities_classes_types_edit' class.pk %}">Ajouter un type</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>Titre</th>
+                <th>Nom</th>
+                <th>Template</th>
+                <th>Actions</th>
+            </tr>
+            {% for type in class.class_types.all %}
+                <tr>
+                    <td>{{ type.title }}</td>
+                    <td>{{ type.name }}</td>
+                    <td>{{ type.template }}</td>
+                    <td><a href="{% url 'meditate.views.admin.entities_classes_types_edit' type.genre.pk type.pk %}">Editer</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

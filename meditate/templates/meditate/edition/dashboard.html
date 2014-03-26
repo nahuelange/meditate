@@ -1,25 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-{% for class_object in classes %}
-    <h2>Add document class : {{ class_object }}</h2>
-    <ul>
-    {% for class_type in class_object.class_types.all %}
-        <li><a href="{% url 'meditate.views.edition.entity_edit' class_type.name %}">{{ class_type }}</a></li>
-    {% endfor %}
-    </ul>
-{% endfor %}
+{% extends 'meditate/base.html' %}
 
-<table>
-    {% for entity in entities %}
-        <tr>
-            <td>{{ entity }}</td>
-            <td><a href="{% url 'meditate.views.edition.entity_edit' entity.pk %}">Edit</a></td>
-        </tr>
-    {% endfor %}
-</table>
-</body>
-</html>
+{% block page_title %}Édition{% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-2">Add document:</div>
+            <div class="col-lg-10">
+                <ul class="nav nav-pills">
+                {% for class_object in classes %}
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{ class_object }} <span class="badge">{{ class_object.class_types.all.count }}</span></a>
+                        {% if class_object.class_types.all.count %}
+                        <ul class="dropdown-menu">
+                            {% for class_type in class_object.class_types.all %}
+                                <li>
+                                    <a href="{% url 'meditate.views.edition.entity_edit' class_type.name %}">{{ class_type }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-striped table-hover">
+                {% for entity in entities %}
+                    <tr>
+                        <td>{{ entity }}</td>
+                        <td><a href="{% url 'meditate.views.edition.entity_edit' entity.pk %}">Edit</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

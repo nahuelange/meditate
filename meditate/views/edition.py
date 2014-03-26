@@ -12,8 +12,9 @@ def dashboard(request):
 
     return render_to_response('meditate/edition/dashboard.html', c)
 
-def entity_edit(request, parent_pk=None, entity_pk=None, class_type_name=None):
 
+def entity_edit(request, parent_pk=None, entity_pk=None, class_type_name=None):
+    print(class_type_name)
     if entity_pk:
         entity = get_object_or_404(Entity, pk=entity_pk)
         class_type = entity.class_type
@@ -31,7 +32,10 @@ def entity_edit(request, parent_pk=None, entity_pk=None, class_type_name=None):
             return redirect(reverse('meditate.views.edition.dashboard'))
 
     c = RequestContext(request, {
-        'form' : form,
+        'form': form,
+        'parent': parent_pk,
+        'entity': entity,
+        'class_type_name': class_type_name,
         })
 
     return render_to_response('meditate/edition/entity_edit.html', c)

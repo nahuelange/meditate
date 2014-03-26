@@ -1,0 +1,7 @@
+{% extends 'meditate/admin/base_classes_edit.html' %}
+
+{% block page_title %}Édition de groupe de champ de la classe {{ class }}{% endblock %}
+
+{% block form_url %}{% if field_group.pk %}{% url 'meditate.views.admin.entities_classes_field_group_edit' class.pk field_group.pk %}{% else %}{% url 'meditate.views.admin.entities_classes_field_group_edit' class.pk %}{% endif %}{% endblock %}
+
+

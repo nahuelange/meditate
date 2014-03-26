@@ -1,15 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends 'meditate/base.html' %}
 
-<form method="POST" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" />
-</form>
+{% block page_title %}Édition d'entité{% endblock %}
 
-</body>
-</html>
+{% block container %}
+    <div class="row">
+        <div class="col-lg-12">
+            {% if entity.pk %}
+                <form method="POST" class="form-horizontal" action="{% url 'meditate.views.edition.entity_edit' entity.pk %}">
+            {% else %}
+                <form method="POST" class="form-horizontal" action="{% url 'meditate.views.edition.entity_edit' class_type_name %}">
+            {% endif %}
+                {% csrf_token %}
+                {% include 'form/form.html' %}
+                {% include 'form/validation.html' %}
+            </form>
+        </div>
+    </div>
+{% endblock %}

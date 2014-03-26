@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Édition de classe d'entité</title>
-</head>
-<body>
-    <h1>Édition de classe d'entité</h1>
-    <form action="" method="POST">
-        {%   csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Enregistrer" />
-    </form>
-</body>
-</html>
+{% extends 'meditate/admin/base_classes_edit.html' %}
+
+{% block page_title %}Édition de classe d'entité{% endblock %}
+
+{% block form_url %}{% if class.pk %}{% url 'meditate.views.admin.entities_classes_edit' class.pk %}{% else %}{% url 'meditate.views.admin.entities_classes_edit' %}{% endif %}{% endblock %}
+

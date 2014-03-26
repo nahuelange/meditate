@@ -30,6 +30,7 @@ def entities_classes_edit(request, class_pk=None):
         form = ClassForm(instance=class_object)
 
     c = RequestContext(request, {
+        'class': class_object,
         'form': form,
     })
 
@@ -40,7 +41,7 @@ def entities_classes_types(request, class_pk):
     class_object = get_object_or_404(Class, pk=class_pk)
 
     c = RequestContext(request, {
-        'class' : class_object,
+        'class': class_object,
     })
     return render_to_response('meditate/admin/classes_entities_types.html', c)
 
@@ -63,15 +64,18 @@ def entities_classes_types_edit(request, class_pk, type_pk=None):
 
     c = RequestContext(request, {
         'form': form,
+        'class': class_object,
+        'type': type_object,
     })
 
-    return render_to_response('meditate/admin/classes_entities_edit.html', c)
+    return render_to_response('meditate/admin/classes_entities_types_edit.html', c)
 
 def entities_classes_field_groups(request, class_pk):
     class_object = get_object_or_404(Class, pk=class_pk)
 
     c = RequestContext(request, {
-        'class' : class_object,
+        'class': class_object,
+        'field_groups': class_object.field_groups.all().order_by('rank')
     })
     return render_to_response('meditate/admin/classes_entities_field_groups.html', c)
 
@@ -94,9 +98,11 @@ def entities_classes_field_group_edit(request, class_pk, field_group_pk=None):
 
     c = RequestContext(request, {
         'form': form,
+        'class': class_object,
+        'field_group': field_group_object,
     })
 
-    return render_to_response('meditate/admin/classes_entities_edit.html', c)
+    return render_to_response('meditate/admin/classes_entities_field_groups_edit.html', c)
 
 def entities_classes_field_edit(request, class_pk, field_group_pk, field_pk=None):
     class_object = get_object_or_404(Class, pk=class_pk)

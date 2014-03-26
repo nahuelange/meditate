@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
-    <ul>
-        <li>
-            Modèle éditorial
-            <ul>
-                <li><a href="{% url 'meditate.views.admin.entities_classes' %}">Classes d'entitées</a></li>
-                <li><a href="">Classes d'indexes</a></li>
-            </ul>
-        </li>
-    </ul>
-</body>
-</html>
+{% extends 'meditate/base.html' %}
+
+{% block page_title %}Admin{% endblock %}
+
+{% block container %}
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav nav-pills">
+                    <li><a href="{% url 'meditate.views.admin.entities_classes' %}">Classes d'entitées</a></li>
+                    <li><a href="#">Classes d'index</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -3,8 +3,6 @@ from inspect import isclass
 from meditate import forms
 from django.db import models
 from django.conf import settings
-from django.forms import Form
-import sys
 from meditate.forms.edition import DynamicEntityForm
 
 
@@ -27,14 +25,23 @@ class ClassType(models.Model):
 
     def __unicode__(self):
         return self.title
+        unique_together = (
+            ('genre', 'name',),
+            ('genre', 'rank',),
+        )
 
 class ClassFieldGroup(models.Model):
     genre = models.ForeignKey(Class, related_name="field_groups")
     title = models.CharField(max_length=255)
     name = models.CharField(unique=True, max_length=255)
+    rank = models.IntegerField()
 
     def __unicode__(self):
         return self.title
+        unique_together = (
+            ('genre', 'name',),
+            ('genre', 'rank',),
+        )
 
 
 class ClassField(models.Model):
@@ -52,6 +59,7 @@ class ClassField(models.Model):
     dc_type = models.CharField(max_length=255)
     default_value = models.CharField(max_length=255, null=True, default=None, blank=True)
     mandatory = models.BooleanField(default=False)
+    rank = models.IntegerField()
 
 
     def __unicode__(self):

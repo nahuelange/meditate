@@ -1,0 +1,73 @@
+{% load bootstrap %}
+<div class="form-group{% if field.errors %} has-error{% endif %}{% if field.field.required %} required{% endif %}">
+    {% if field|is_checkbox %}
+        <label class="col-lg-2 control-label">{{ field.label }}</label>
+        <div class="col-lg-10">
+            {% for radio in field %}
+                <div class="radio">
+                <label>
+                    {{ radio }} <span>{{ radio.label }}</span>
+                </label>
+                </div>
+            {% endfor %}
+
+
+            {% if field.help_text or field.errors %}
+            <span class="help-block">
+                {{ field.help_text|safe }}
+
+                {% if field.errors %}
+                    <ul role="alert">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </span>
+            {% endif %}
+        </div>
+    {% else %}{% if field|is_radio %}
+        <label class="control-label">{{ field.label }}</label>
+        <div class="controls">
+            {% for choice in field %}
+                <label class="radio">
+                    {{ choice.tag }}
+                    {{ choice.choice_label }}
+                </label>
+            {% endfor %}
+
+            {% if field.help_text or field.errors %}
+            <p class="help-block">
+                {{ field.help_text|safe }}
+
+                {% if field.errors %}
+                    <ul role="alert">
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </p>
+            {% endif %}
+        </div>
+    {% else %}
+        <label class="col-lg-2 control-label" for="{{ field.auto_id }}">{{ field.label }}</label>
+
+        <div class="col-lg-10">
+            {{ field }}
+
+            {% if field.help_text or field.errors %}
+            <p class="help-block">
+                {{ field.help_text|safe }}
+
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        {{ error }}<br />
+                    {% endfor %}
+                {% endif %}
+            </p>
+            {% endif %}
+
+        </div>
+    {% endif %}{% endif %}
+</div>

@@ -1,0 +1,6 @@
+{% extends 'meditate/admin/base_classes_edit.html' %}
+
+{% block page_title %}Édition de type de la classe {{ class }}{% endblock %}
+
+{% block form_url %}{% if type.pk %}{% url 'meditate.views.admin.entities_classes_types_edit' class.pk type.pk %}{% else %}{% url 'meditate.views.admin.entities_classes_types_edit' class.pk %}{% endif %}{% endblock %}
+
